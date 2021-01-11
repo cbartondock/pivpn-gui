@@ -1,2 +1,2 @@
 #!/bin/bash
-awk -F/ '$NF == "bash"' /etc/passwd
+awk -F/ '$NF == "zsh"' /etc/passwd
