@@ -39,7 +39,7 @@ echo '';
     				<th>OpenVPN Client List</th>
     			</thead>
 			</table><br>
-			<pre><?php echo shell_exec("sudo cat /var/log/openvpn-status.log"); ?></pre>
+			<pre><?php echo shell_exec("pivpn -c"); ?></pre>
 	    </div>
 	<div class="col-lg-6">
 		<table class="table">
@@ -48,7 +48,7 @@ echo '';
     			</thead>
 		</table>
 	<?php
-	$profile_stats = shell_exec("pivpn list");
+	$profile_stats = shell_exec("pivpn -l");
 	echo "<pre>".$profile_stats."</pre>";
 	?>
 	</div>
