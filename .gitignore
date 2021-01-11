@@ -1,2 +1,3 @@
 app/tmp/passwd*
 app/auth_log/*
+app/blocked_ip/*
