@@ -24,8 +24,8 @@ echo '';
     			<tbody>
     				<?php
     				//Copied and modified from log.php :) why rewrite the wheel?? :D
-    				$iuser = exec("sudo cat /etc/pivpn/INSTALL_USER");
-    				$log_files = getDirContents('/home/'.$iuser.'/ovpns');
+    				$iuser = exec("whoami");
+    				$log_files = getDirContents('/home/'.$iuser.'/configs');
     				foreach($log_files as $log){
     					$f = explode("/", $log);
     					$file = end($f);
@@ -55,7 +55,7 @@ echo '';
     </div>
     <div class="row">
 	<div class="col-lg-12">
-		
+
 	</div>
 
     </div>

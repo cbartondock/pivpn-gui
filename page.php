@@ -11,7 +11,7 @@ if(isset($_POST['page'])){
 		default:
 			echo "404 - Page not found!";
 			break;
-		
+
 	}
 }
 

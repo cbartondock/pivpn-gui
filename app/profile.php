@@ -15,18 +15,18 @@ $pro = $_POST['profile'];
 add_vpn_profile($pro, $days);
 //Run selected script, but only if it exists in the scr_up folder.
 function add_vpn_profile($profile, $d) {
-	
+
     // Open a handle to expect in write mode
     $p = popen('sudo /usr/bin/expect','w');
 
     // Log conversation for verification
     $log = './tmp/passwd_' . md5($profile . time());
     $cmd .= "log_file -a \"$log\"; ";
-    
+
     // Spawn a shell as $user
     $cmd .= "spawn /bin/bash; ";
     // Change the unix password
-    $cmd .= "send \"pivpn add nopass\\r\"; ";
+    $cmd .= "send \"pivpn -a\\r\"; ";
     $cmd .= "expect \"Enter a Name for the Client:   \"; ";
     $cmd .= "send \"$profile\\r\"; ";
     $cmd .= "expect \"How many days should the certificate last?  $d\"; ";

@@ -31,7 +31,7 @@ function delUser(username){
     			$("#delUserModal").modal('show');
 }
 function addUser(){
-	
+
 	var username = document.getElementById("newUser1").value;
 	var password = document.getElementById("newPasswd1").value;
 	var password2 = document.getElementById("newPasswd2").value;
@@ -165,7 +165,7 @@ function apt_update(){
 			load(false);
 		});
 }
-   		
+
 function apt_upgrade(){
 	load(true);
 	document.getElementById("pageContent").innerHTML = "Installing upgrades... Any errors will be output to the page. This will take some time, please wait...";
@@ -182,7 +182,7 @@ function apt_upgrade(){
 		}).fail(function(e) {
 			document.getElementById("pageContent").innerHTML = "Due to the timeout configured on the server, or your browser, this request timed out. The upgrade is still running on the server though. SSH to check upgrade status is recommended.";
 			genModal("Error", "Due to the timeout configured on the server, or your browser, this request timed out. The upgrade is still running on the server though. SSH to check upgrade status is recommended.");
-			load(false);		
+			load(false);
 		});
 }
 function serviceAction(name, type){
@@ -201,7 +201,7 @@ function serviceAction(name, type){
 		}
 		}).fail(function(e) {
 			genModal("Error", "Due to the timeout configured on the server, or your browser, this request timed out. The command is still running on the server though. SSH to check upgrade status is recommended.");
-			load(false);		
+			load(false);
 		});
 }
 function configSave(){
@@ -252,7 +252,7 @@ function smbGet(option){
 }
 function arrayToTable(tableData) {
 	console.info(tableData);
-	
+
     var table = $('<table class="table"></table>');
     $(tableData).each(function (i, rowData) {
         var row = $('<tr></tr>');
@@ -296,7 +296,7 @@ function stopUpload(success,uploadedFile){
 	document.getElementById('uploadForm').innerHTML = result + '<label>File: <input name="myfile" type="file" size="30" /><\/label><br /><label><input type="submit" name="submitBtn" class="btn btn-raised btn-primary" value="Upload" /><\/label>';
 	document.getElementById('uploadForm').style.visibility = 'visible';
 	window.setTimeout(function(){pageLoad('apps')}, 2000);
-		return true;   
+		return true;
 }
 function load(type){
 	if(type === true){
@@ -321,7 +321,7 @@ function cronDelete(name, type3){
 			load(false);
 			genModal("Results", "<pre>" + result + "</pre>");
 			pageLoad('cron');
-			
+
 		}
 		}).fail(function(e) {
 			load(false);
@@ -369,14 +369,14 @@ function runScript(filename){
 		success:function(result) {
 			load(false);
 			genModal("Script \"" + filename + "\" run results:", "<pre>" + result + "</pre>");
-			
+
 		}
 		}).fail(function(e) {
 			load(false);
 			genModal("Error", e);
 		});
-	
-	
+
+
 }
 function oProfile(){
 	load(true)
@@ -393,14 +393,14 @@ function oProfile(){
 			load(false);
 			genModal("Profile creation status (" + user + "):", '<pre style="overscroll-y:scroll; max-height:400px;">' + result + "</pre>");
 			pageLoad('openvpn');
-			
+
 		}
 		}).fail(function(e) {
 			load(false);
 			genModal("Error", e);
 		});
-	
-	
+
+
 }
 function rProfile(user){
 	load(true)
@@ -414,14 +414,14 @@ function rProfile(user){
 			load(false);
 			genModal("Profile revoke status (" + user + "):", '<pre style="overscroll-y:scroll; max-height:400px;">' + result + "</pre>");
 			pageLoad('openvpn');
-			
+
 		}
 		}).fail(function(e) {
 			load(false);
 			genModal("Error", e);
 		});
-	
-	
+
+
 }
 function createProfile(){
 	profileForm = '<input class="form-control" type="text" placeholder="Profile Name" name="profile_name" id="profile_name">';
@@ -442,14 +442,14 @@ function displayLog(filename){
 		success:function(result) {
 			load(false);
 			genModal("Log \"" + filename + "\" content:", "<pre class=\"ativa-scroll\">" + result + "</pre>");
-			
+
 		}
 		}).fail(function(e) {
 			load(false);
 			genModal("Error", e);
 		});
-	
-	
+
+
 }
 function displayProfile(filename){
 	load(true)
@@ -462,14 +462,14 @@ function displayProfile(filename){
 		success:function(result) {
 			load(false);
 			genModal("OpenVPN Profile \"" + filename + "\" content:<br><small>Copy and paste into an OVPN file to use</small>", "<pre class=\"ativa-scroll\">" + result + "</pre>");
-			
+
 		}
 		}).fail(function(e) {
 			load(false);
 			genModal("Error", e);
 		});
-	
-	
+
+
 }
 function delScript(filename){
 	load(true)
@@ -484,7 +484,7 @@ function delScript(filename){
 			load(false);
 			genModal("Results", "<pre>" + result + "</pre>");
 			pageLoad('apps');
-			
+
 		}
 		}).fail(function(e) {
 			load(false);
@@ -508,7 +508,7 @@ function unblock(ip){
 				genModal("Results", "<pre>" + result + "</pre>");
 				pageLoad('block');
 			}
-			
+
 		}
 		}).fail(function(e) {
 			load(false);
