@@ -8,10 +8,7 @@ head();
 //Check for login or dashboard...
 if(isset($_POST['username']) && isset($_POST['password'])){
   //Attempt to login...
-	if(!file_exists("app/auth_log/debug.log")){touch("./auth_log/debug.log");}
   if(file_exists("app/blocked_ip/".$_SERVER['REMOTE_ADDR'])){
-    $sa = $_SERVER['REMOTE_ADDR'];
-    file_put_contents("app/auth_log/debug.log","server address $sa");
 		$_SESSION['loginError'] = "Too many login attempts, please contact the system administrator.";
 	} else {
 		$u = $_POST['username'];

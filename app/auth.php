@@ -13,13 +13,14 @@ function auth($username, $password){
 	}
 
   if(!file_exists("app/auth_log/debug.log")){touch("./auth_log/debug.log");}
-  $password = escapeshellarg($password);
-  file_put_contents("app/auth_log/debug.log","$date [DEBUG] - input pass $password");
-  $envpass = $_ENV['PIVPNPASS'];
-  $envuser = $_ENV['PIVPNUSER'];
-  file_put_contents("app/auth_log/debug.log","$date [DEBUG] - env user $envuser");
-  file_put_contents("app/auth_log/debug.log","$date [DEBUG] - env pass $envpass");
-  return ($username==$_ENV['PIVPNUSER'] && $password==$_ENV['PIVPNPASS']);
+  $password = trim(escapeshellarg($password),"'");
+  $envpass = $_SERVER['PIVPNPASS'];
+  $envuser = $_SERVER['PIVPNUSER'];
+
+  // file_put_contents("app/auth_log/debug.log","$date [DEBUG] - input pass $password\n", FILE_APPEND);
+  // file_put_contents("app/auth_log/debug.log","$date [DEBUG] - env user $envuser\n", FILE_APPEND);
+  // file_put_contents("app/auth_log/debug.log","$date [DEBUG] - env pass $envpass\n", FILE_APPEND);
+  return ($username==$envuser && $password==$envpass);
 
 }
 
