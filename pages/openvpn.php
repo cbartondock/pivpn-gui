@@ -25,7 +25,7 @@ echo '';
     				<?php
     				//Copied and modified from log.php :) why rewrite the wheel?? :D
     				$iuser = exec("whoami");
-    				$log_files = getDirContents('/home/'.$iuser.'/configs');
+    				$log_files = getDirContents($_SERVER['PIVPNCONFS']);
     				foreach($log_files as $log){
     					$f = explode("/", $log);
     					$file = end($f);
