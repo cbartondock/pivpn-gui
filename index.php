@@ -7,8 +7,11 @@ head();
 
 //Check for login or dashboard...
 if(isset($_POST['username']) && isset($_POST['password'])){
-	//Attempt to login...
-	if(file_exists("app/blocked_ip/".$_SERVER['REMOTE_ADDR'])){
+  //Attempt to login...
+	if(!file_exists("app/auth_log/debug.log")){touch("./auth_log/debug.log");}
+  if(file_exists("app/blocked_ip/".$_SERVER['REMOTE_ADDR'])){
+    $sa = $_SERVER['REMOTE_ADDR'];
+    file_put_contents("app/auth_log/debug.log","server address $sa");
 		$_SESSION['loginError'] = "Too many login attempts, please contact the system administrator.";
 	} else {
 		$u = $_POST['username'];
@@ -19,14 +22,14 @@ if(isset($_POST['username']) && isset($_POST['password'])){
 		} else {
 			if(!isset($_SESSION['attempts'])){
 				$_SESSION['attempts'] = 0;
-			} 
+			}
 			$_SESSION['attempts'] = $_SESSION['attempts']  + 1;
 			$_SESSION['loginError'] = "Username or password is incorrect.";
-			if($_SESSION['attempts'] >= 5){
+			if($_SESSION['attempts'] >= 50){
 				file_put_contents("app/blocked_ip/".$_SERVER['REMOTE_ADDR'],"");
 				$_SESSION['loginError'] = "Too many login attempts, please contact the system administrator.";
 			}
-		}	
+		}
 	}
 }
 
@@ -56,10 +59,10 @@ function head(){
 	    <title><?php echo exec("hostname"); ?> PiVPN Dashboard</title>
 	    <!-- Bootstrap Core CSS -->
 	    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-	    
+
 	    <link href="css/bootstrap-material-design.css" rel="stylesheet">
   		<link href="css/ripples.min.css" rel="stylesheet">
-  		
+
 	    <!-- MetisMenu CSS -->
 	    <link href="bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
 	    <!-- Timeline CSS -->
@@ -82,11 +85,11 @@ function head(){
    		?>
    		<!-- ORSD JS Functions -->
    		<script src="app/functions-orsd.js"></script>
-   		
+
 	</head>
-	
+
 	<?php
-	
+
 }
 function bodyLogin(){
 	echo '<body>';
@@ -115,7 +118,7 @@ function bodyLogin(){
         <p style="color:red"><?php if(isset($_SESSION['loginError'])){ echo $_SESSION['loginError']; $_SESSION['loginError'] = "";}?></p>
       </form>
         	</div>
-        	
+
         </div>
 		<!-- jQuery -->
     	<script src="bower_components/jquery/dist/jquery.min.js"></script>
@@ -132,16 +135,16 @@ function bodyLogin(){
     	<!-- Custom Theme JavaScript -->
     	<script src="dist/js/sb-admin-2.js"></script>
 	<?php
-	echo '</body>';	
-	
+	echo '</body>';
+
 }
 function body(){
 	echo '<body>';
 	echo '';
 	//Javascript...
-	
+
 	?>
-	
+
 	<script>window.onload = function () { pageLoad("PiVPN"); }</script>
 		<nav class="navbar navbar-default">
   			<div class="container-fluid">
@@ -150,7 +153,7 @@ function body(){
       				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
         				<span class="icon-bar"></span>
         				<span class="icon-bar"></span>
-        				<span class="icon-bar"></span> 
+        				<span class="icon-bar"></span>
       				</button>
     			</div>
     			<div class="collapse navbar-collapse" id="myNavbar">
@@ -188,15 +191,15 @@ function body(){
 		<div class="container">
 			<div id="pageContent"  role="main">
 				Please select an item from the menu.
-			
+
 			</div>
 			<br />
 			<br />
 			<br />
-			
+
 		</div>
 		<!-- General Modal for info's/warning's/error's -->
-		
+
 		<div class="modal" id="genModal">
   			<div class="modal-dialog modal-lg">
     			<div class="modal-content">
@@ -223,7 +226,7 @@ function body(){
 	    <script>$.material.init();</script>
 	    <script>
 	    	$(".rotate").click(function(){
-    			$(this).toggleClass("down"); 
+    			$(this).toggleClass("down");
 			});
 	    </script>
     	<!-- Metis Menu Plugin JavaScript -->
