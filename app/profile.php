@@ -1,7 +1,7 @@
 <?php
 //Check for valid session:
 session_start();
-include('app/functions.php');
+include('functions.php');
 if(!isset($_SESSION['username'])){
 	die("You must be logged in to view this page!");
 }
@@ -17,10 +17,11 @@ add_vpn_profile($pro, $days);
 function add_vpn_profile($profile, $d) {
 
     // Open a handle to expect in write mode
-    $p = popen('sudo /usr/bin/expect','w');
+    $p = popen('/usr/bin/expect','w');
 
     // Log conversation for verification
-    $log = './tmp/passwd_' . md5($profile . time());
+    $log = $_SERVER['HOME'].'/app/tmp/passwd_' . md5($profile . time());
+    if(!file_exists($log)){touch($log);}
     $cmd .= "log_file -a \"$log\"; ";
 
     // Spawn a shell as $user
@@ -36,7 +37,7 @@ function add_vpn_profile($profile, $d) {
     fwrite($p, $cmd); pclose ($p);
 
     // Read & delete the log
-    $fp = fopen($log,r);
+    $fp = fopen($log,'r');
     $output = fread($fp, 2048);
     fclose($fp); unlink($log);
 	print "Notification : $output ";

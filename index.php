@@ -106,7 +106,7 @@ function bodyLogin(){
         <div class="container">
         	<div class="row">
         		<form class="form-signin" method="POST" action="index.php">
-        		<h2 class="form-signin-heading text-center">Sign In to <?php echo exec("hostname"); ?></h2>
+        		<h2 class="form-signin-heading text-center"><?php echo exec("hostname"); ?> PiVPN</h2>
         		<label for="password" class="sr-only">Username</label>
         			<input type="username" id="username" name="username" class="form-control" placeholder="Username" required autofocus><br />
         		<label for="password" class="sr-only">Password</label>

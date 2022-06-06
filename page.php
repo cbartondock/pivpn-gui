@@ -9,7 +9,7 @@ if(isset($_POST['page'])){
 			openvpn();
 			break;
 		default:
-			echo "404 - Page not found!";
+			echo "404 - Page not found! ".$_POST['page'];
 			break;
 
 	}
